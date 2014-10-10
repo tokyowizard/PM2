@@ -126,6 +126,7 @@
     "cron"                : "1.0.5",
     "debug"               : "2.1.0",
     "eventemitter2"       : "0.4.14",
+    "es6-promise"         : "1.0.x",
     "json-stringify-safe" : "5.0.0",
     "moment"              : "~2.8.3",
     "nssocket"            : "0.5.1",
