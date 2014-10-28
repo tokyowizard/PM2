@@ -92,7 +92,7 @@ Example:
 require('pm2')().connect()
 ```
 
-### create(app[, cb)
+### create(app[, cb])
 
 Create a new app in the pm2 database and immediately start it.
 
@@ -113,9 +113,31 @@ require('pm2')().create({
 //   Successfully started 4 processes
 ```
 
-### list([cb])
+### list(spec[, cb])
 
-Return the list of all running processes.
+Return the list of running processes that match `spec` (default: `{}` matches all processes).
+
+See details about `spec` argument in the [filtering](#filtering) chapter below.
+
+### reload(spec[, cb])
+
+
+
+### restart(spec[, cb])
+
+Stop processes if they aren't stopped already and start them afterwards.
+
+This function essentially combines both "stop" and "start". It returns the list of restarted processes.
+
+### start(spec[, cb])
+
+Start any stopped processes that match `spec`.
+
+This function returns the list of processes that it just started.
+
+### stop(spec[, cb])
+
+Stop any running processes that match `spec`.
 
 ### version([cb])
 
@@ -129,6 +151,19 @@ require('pm2')().version(function(err, ver) {
 })
 // output: You're running pm2 version 0.11.0-beta1
 ```
+
+<a name="filtering"></a>
+## Filtering
+
+Functions that work with processes (`list`, `start`, `stop`, `restart`, `reload`, etc.) by default do their thing with all of them.
+
+For example, if you run `pm2().restart()`, it'll attempt to restart all processes.
+
+However, you can limit what processes you can restart in this example using a `spec` object.
+
+`pm2().restart({id: 1})` would restart only a process with pm_id=1, and `pm2().restart({name: 'foo'})` would restart only processes named foo.
+
+At this moment, you can perform search using `id`, `name`, `script`, `port` and `path`.
 
 ## Events
 
